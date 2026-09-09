@@ -1,7 +1,7 @@
 var prompt = require('prompt-sync')();
 
 // =================================
-// 1. LES DONNÉES (TRIPS)
+// 1. LES DONNÉES (TRIPS & TICKETS)
 // =================================
 const trips = [
     {
@@ -186,13 +186,17 @@ const trips = [
     }
 ];
 
+// Tableau dial l-tickets o compteur dial l-IDs (DIMA F L-FOQ!)
+const tickets = [];
+let ticketIdCounter = 1;
+
 // =================================
-// 2. FONCTIONS DE L'APPLICATION
+// 2. LES FONCTIONS
 // =================================
 
 // --- Afficher le menu ---
 function afficherMenu() {
-    console.log("=================================");
+    console.log("\n=================================");
     console.log("        RAILWAY MANAGER");
     console.log("=================================");
     console.log("1. Afficher les trajets");
@@ -207,48 +211,93 @@ function afficherMenu() {
 }
 
 // --- Option 1 : Afficher les trajets ---
-// function afficherTrajets() {
-//     console.log("=== TRAJETS DISPONIBLES ===");
-//     for (let i = 0; i < trips.length; i++) {
-//         const t = trips[i];
-//         console.log(`#${t.id} ${t.departure} → ${t.destination}`);node app.js
-//         console.log(`  Départ : ${t.departureTime}`);
-//         console.log(`  Arrivée : ${t.arrivalTime}`);
-//         console.log(`  Prix : ${t.price} DH`);
-//         console.log(`  Places disponibles : ${t.availableSeats}\n`);
-//     }
-// }
 function afficherTrajets() {
-    console.log("=== TRAJETS DISPONIBLES ===");
-    console.table(trips, ['id', 'departure', 'destination', 'departureTime', 'arrivalTime', 'price', 'availableSeats']);
+    console.log("\n=== TRAJETS DISPONIBLES ===");
+    for (let i = 0; i < trips.length; i++) {
+        const t = trips[i];
+        console.log("#" + t.id + " " + t.departure + " → " + t.destination);
+        console.log("  Départ : " + t.departureTime);
+        console.log("  Arrivée : " + t.arrivalTime);
+        console.log("  Prix : " + t.price + " DH");
+        console.log("  Places disponibles : " + t.availableSeats + "\n");
+    }
 }
 
+// --- Option 2 : Acheter un ticket ---
+function acheterTicket() {
+    console.log("\n=== ACHETER UN TICKET ===");
+    
+    const passengerName = prompt("Nom du passager : ");
+    if (!passengerName || passengerName.trim() === "") {
+        console.log("Nom invalide.");
+        return;
+    }
 
+    const tripId = parseInt(prompt("Identifiant du trajet : "));
+    if (isNaN(tripId)) {
+        console.log("Identifiant invalide.");
+        return;
+    }
 
+    // 1. Qllab 3la l-trajet
+    const trip = trips.find(t => t.id === tripId);
 
+    if (!trip) {
+        console.log("Trajet introuvable.");
+        return;
+    }
 
+    if (trip.availableSeats <= 0) {
+        console.log("Train complet.");
+        return;
+    }
 
+    // 2. Hssab raqm l-blassa
+    const seatNumber = 50 - trip.availableSeats + 1;
 
+    // 3. Ssewb l-ticket
+    const ticket = {
+        id: ticketIdCounter++,
+        passengerName: passengerName.trim(),
+        tripId: tripId,
+        seatNumber: seatNumber,
+        price: trip.price
+    };
 
+    // 4. Zid f l-tableau o nqqess blassa
+    tickets.push(ticket);
+    trip.availableSeats--;
 
+    console.log("\nTicket acheté avec succès.");
+    console.log(`Ticket #${ticket.id}`);
+    console.log(`Passager : ${ticket.passengerName}`);
+    console.log(`Trajet : ${trip.departure} → ${trip.destination}`);
+    console.log(`Place : ${ticket.seatNumber}`);
+    console.log(`Prix : ${ticket.price} DH`);
+}
 
+// --- Option 3 : Afficher les tickets ---
+function afficherTickets() {
+    if (tickets.length === 0) {
+        console.log("\nAucun ticket enregistré.");
+        return;
+    }
 
+    console.log("\n=== TICKETS ===\n");
+    for (let i = 0; i < tickets.length; i++) {
+        const ticket = tickets[i];
+        const trip = trips.find(t => t.id === ticket.tripId);
 
-
-
-
-
-
-
-
-
-
-
-
-
+        console.log(`Ticket #${ticket.id}`);
+        console.log(`Passager : ${ticket.passengerName}`);
+        console.log(`Trajet : ${trip.departure} → ${trip.destination}`);
+        console.log(`Place : ${ticket.seatNumber}`);
+        console.log(`Prix : ${ticket.price} DH\n`);
+    }
+}
 
 // =================================
-// 3. BOUCLE PRINCIPALE (MAIN)
+// 3. BOUCLE PRINCIPALE (MAIN LOOP)
 // =================================
 let running = true;
 
@@ -259,8 +308,14 @@ while (running) {
     if (choix === "1") {
         afficherTrajets(); 
     } 
+    else if (choix === "2") {
+        acheterTicket(); 
+    }
+    else if (choix === "3") {
+        afficherTickets(); 
+    }
     else if (choix === "0") {
-        console.log("Au revoir !");
+        console.log("Au revoir");
         running = false; 
     } 
     else {
