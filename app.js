@@ -207,17 +207,45 @@ function afficherMenu() {
 }
 
 // --- Option 1 : Afficher les trajets ---
+// function afficherTrajets() {
+//     console.log("=== TRAJETS DISPONIBLES ===");
+//     for (let i = 0; i < trips.length; i++) {
+//         const t = trips[i];
+//         console.log(`#${t.id} ${t.departure} → ${t.destination}`);node app.js
+//         console.log(`  Départ : ${t.departureTime}`);
+//         console.log(`  Arrivée : ${t.arrivalTime}`);
+//         console.log(`  Prix : ${t.price} DH`);
+//         console.log(`  Places disponibles : ${t.availableSeats}\n`);
+//     }
+// }
 function afficherTrajets() {
     console.log("=== TRAJETS DISPONIBLES ===");
-    for (let i = 0; i < trips.length; i++) {
-        const t = trips[i];
-        console.log(`#${t.id} ${t.departure} → ${t.destination}`);
-        console.log(`  Départ : ${t.departureTime}`);
-        console.log(`  Arrivée : ${t.arrivalTime}`);
-        console.log(`  Prix : ${t.price} DH`);
-        console.log(`  Places disponibles : ${t.availableSeats}\n`);
-    }
+    console.table(trips, ['id', 'departure', 'destination', 'departureTime', 'arrivalTime', 'price', 'availableSeats']);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // =================================
 // 3. BOUCLE PRINCIPALE (MAIN)
