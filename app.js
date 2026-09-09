@@ -2,6 +2,7 @@ var prompt = require('prompt-sync')();
 
 
 // 1. LES DONNÉES (TRIPS & TICKETS)
+
 const trips = [
     {
         id: 1,
@@ -189,9 +190,9 @@ const trips = [
 const tickets = [];
 let ticketIdCounter = 1;
 
-// =================================
+
 // 2. LES FONCTIONS
-// =================================
+
 
 // --- Menu ---
 function afficherMenu() {
@@ -250,7 +251,18 @@ function acheterTicket() {
         return;
     }
 
-    const seatNumber = 50 - trip.availableSeats + 1;
+    // --- SOLUTION POUR NE PAS AVOIR DE PLACES EN DOUBLE ---
+    // 1. N-jbdou ga3 l-blayess li dja makhoudin f had l-trajet
+    const placesOccupees = tickets
+        .filter(t => t.tripId === tripId)
+        .map(t => t.seatNumber);
+
+    // 2. N-qllbo 3la aoual raqm khawi (mn 1 l 50)
+    let seatNumber = 1;
+    while (placesOccupees.includes(seatNumber)) {
+        seatNumber++;
+    }
+    // --------------------------------------------------------
 
     const ticket = {
         id: ticketIdCounter++,
@@ -394,6 +406,7 @@ function trierTrajets() {
     }
 }
 
+
 // 3. BOUCLE PRINCIPALE (MAIN LOOP)
 
 let running = true;
@@ -431,8 +444,3 @@ while (running) {
         console.log("\nChoix invalide. Veuillez réessayer.");
     }
 }
-
-
-
-
-
