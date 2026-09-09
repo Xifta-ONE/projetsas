@@ -1,8 +1,8 @@
 var prompt = require('prompt-sync')();
 
-// =================================
+
 // 1. LES DONNÉES (TRIPS & TICKETS)
-// =================================
+
 const trips = [
     {
         id: 1,
@@ -190,9 +190,9 @@ const trips = [
 const tickets = [];
 let ticketIdCounter = 1;
 
-// =================================
+
 // 2. LES FONCTIONS
-// =================================
+
 
 // --- Afficher le menu ---
 function afficherMenu() {
@@ -264,7 +264,7 @@ function acheterTicket() {
         price: trip.price
     };
 
-    // 4. Zid f l-tableau o nqqess blassa
+// 4. Zid f l-tableau o nqqess blassa
     tickets.push(ticket);
     trip.availableSeats--;
 
@@ -296,9 +296,7 @@ function afficherTickets() {
     }
 }
 
-// =================================
 // 3. BOUCLE PRINCIPALE (MAIN LOOP)
-// =================================
 let running = true;
 
 while (running) {
