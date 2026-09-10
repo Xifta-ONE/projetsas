@@ -192,6 +192,7 @@ let ticketIdCounter = 1;
 
 // =================================
 // 2. LES FONCTIONS
+// affichage ta3 l menu 
 
  
 // --- Menu ---
@@ -210,7 +211,7 @@ function afficherMenu() {
     console.log("=================================");
 }
 
---- Option 1 : Afficher les trajets ---
+// --- Option 1 : Afficher les trajets ---
 function afficherTrajets() {
     console.log("=== TRAJETS DISPONIBLES ===");
     for (let i = 0; i < trips.length; i++) {
@@ -335,6 +336,10 @@ function annulerTicket() {
     console.log("Ticket annulé avec succès.");
 }
 
+
+
+
+
 // --- Option 5 : Rechercher un ticket ---
 function rechercherTicket() {
     console.log("=== RECHERCHER UN TICKET ===");
@@ -368,6 +373,10 @@ function rechercherTicket() {
     }
 }
 
+
+
+
+
 // --- Option 6 : Filtrer les trajets ---
 function filtrerTrajets() {
     console.log("=== FILTRER LES TRAJETS ===");
@@ -395,7 +404,11 @@ function filtrerTrajets() {
     }
 }
 
+
+
+
 // --- Option 7 : Trier les trajets ---
+
 function trierTrajets() {
     console.log(" === TRAJETS TRIÉS PAR PRIX CROISSANT ===");
     
