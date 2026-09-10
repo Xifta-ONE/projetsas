@@ -1,6 +1,6 @@
 var prompt = require('prompt-sync')();
 
-
+// ===========================
 // 1. LES DONNÉES (TRIPS & TICKETS)
 
 const trips = [
@@ -170,7 +170,6 @@ const trips = [
         id: 19,
         departure: "Marrakech",
         destination: "Agadir",
-        
         departureTime: "15:00",
         arrivalTime: "18:30",
         price: 100,
@@ -191,10 +190,10 @@ const trips = [
 const tickets = [];
 let ticketIdCounter = 1;
 
-
+// =================================
 // 2. LES FONCTIONS
 
-
+ 
 // --- Menu ---
 function afficherMenu() {
     console.log("=================================");
@@ -211,27 +210,23 @@ function afficherMenu() {
     console.log("=================================");
 }
 
-// --- Option 1 : Afficher les trajets ---
-// tfyugiu
-
+--- Option 1 : Afficher les trajets ---
 function afficherTrajets() {
     console.log("=== TRAJETS DISPONIBLES ===");
     for (let i = 0; i < trips.length; i++) {
         const t = trips[i];
-         console.log("-_-_-_-_-_-_-_-_-_-_-_-_");
-        console.log( t.id + " " + t.departure + " → " + t.destination);
+        console.log("-_-_-_-_-_-_-_-_-_-_-_-_");
+        console.log("#" + t.id + " " + t.departure + " → " + t.destination);
         console.log("  Départ : " + t.departureTime);
         console.log("  Arrivée : " + t.arrivalTime);
         console.log("  Prix : " + t.price + " DH");
-        console.log("  Places disponibles : " + t.availableSeats );
-      
+        console.log("  Places disponibles : " + t.availableSeats);
     }
 }
 // function afficherTrajets() {
-//     console.log("                       === TRAJETS DISPONIBLES ===");
+//     console.log("=== TRAJETS DISPONIBLES ===");
 //     console.table(trips, ['id', 'departure', 'destination', 'departureTime', 'arrivalTime', 'price', 'availableSeats']);
 // }
-
 // --- Option 2 : Acheter un ticket ---
 function acheterTicket() {
     console.log("=== ACHETER UN TICKET ===");
@@ -260,18 +255,15 @@ function acheterTicket() {
         return;
     }
 
-    // --- SOLUTION POUR NE PAS AVOIR DE PLACES EN DOUBLE ---
-    // 1. N-jbdou ga3 l-blayess li dja makhoudin f had l-trajet
+    
     const placesOccupees = tickets
         .filter(t => t.tripId === tripId)
         .map(t => t.seatNumber);
 
-    // 2. N-qllbo 3la aoual raqm khawi (mn 1 l 50)
     let seatNumber = 1;
     while (placesOccupees.includes(seatNumber)) {
         seatNumber++;
     }
-    // --------------------------------------------------------
 
     const ticket = {
         id: ticketIdCounter++,
@@ -295,7 +287,7 @@ function acheterTicket() {
 // --- Option 3 : Afficher les tickets ---
 function afficherTickets() {
     if (tickets.length === 0) {
-        console.log("\nAucun ticket enregistré.");
+        console.log("Aucun ticket enregistré.");
         return;
     }
 
@@ -308,7 +300,7 @@ function afficherTickets() {
         console.log("Passager : " + ticket.passengerName);
         console.log("Trajet : " + trip.departure + " → " + trip.destination);
         console.log("Place : " + ticket.seatNumber);
-        console.log("Prix : " + ticket.price + " DH");
+        console.log("Prix : " + trip.price + " DH");
     }
 }
 
@@ -363,7 +355,7 @@ function rechercherTicket() {
         return;
     }
 
-    console.log(resultats.length + " ticket(s) trouvé(s) :");
+    console.log("" + resultats.length + " ticket(s) trouvé(s) :");
     for (let i = 0; i < resultats.length; i++) {
         const ticket = resultats[i];
         const trip = trips.find(t => t.id === ticket.tripId);
@@ -372,7 +364,7 @@ function rechercherTicket() {
         console.log("Passager : " + ticket.passengerName);
         console.log("Trajet : " + trip.departure + " → " + trip.destination);
         console.log("Place : " + ticket.seatNumber);
-        console.log("Prix : " + ticket.price + " DH");
+        console.log("Prix : " + trip.price + " DH");
     }
 }
 
@@ -405,13 +397,13 @@ function filtrerTrajets() {
 
 // --- Option 7 : Trier les trajets ---
 function trierTrajets() {
-    console.log("=== TRAJETS TRIÉS PAR PRIX CROISSANT ===");
+    console.log(" === TRAJETS TRIÉS PAR PRIX CROISSANT ===");
     
     const tries = [...trips].sort((a, b) => a.price - b.price);
 
     for (let i = 0; i < tries.length; i++) {
         const t = tries[i];
-        cconsole.log(t.departure + " → " + t.destination + " : " + t.price + " DH");
+        console.log(t.departure + " → " + t.destination + " : " + t.price + " DH"); 
     }
 }
 
@@ -446,11 +438,10 @@ while (running) {
         trierTrajets(); 
     }
     else if (choix === "0") {
-        console.log("Au revoir");
+        console.log("Au revoir !");
         running = false; 
     } 
     else {
         console.log("Choix invalide. Veuillez réessayer.");
     }
 }
-

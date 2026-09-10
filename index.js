@@ -11,5 +11,5 @@ console.log("Hello " + name);
         console.log(`  Départ : ${t.departureTime}`);
         console.log(`  Arrivée : ${t.arrivalTime}`);
         console.log(`  Prix : ${t.price} DH`);
-        console.log(`  Places disponibles : ${t.availableSeats}\n`);
+        console.log(`  Places disponibles : ${t.availableSeats}`);
         
