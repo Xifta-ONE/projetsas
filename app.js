@@ -170,6 +170,7 @@ const trips = [
         id: 19,
         departure: "Marrakech",
         destination: "Agadir",
+        
         departureTime: "15:00",
         arrivalTime: "18:30",
         price: 100,
@@ -196,7 +197,7 @@ let ticketIdCounter = 1;
 
 // --- Menu ---
 function afficherMenu() {
-    console.log("\n=================================");
+    console.log("=================================");
     console.log("        RAILWAY MANAGER");
     console.log("=================================");
     console.log("1. Afficher les trajets");
@@ -211,21 +212,29 @@ function afficherMenu() {
 }
 
 // --- Option 1 : Afficher les trajets ---
+// tfyugiu
+
 function afficherTrajets() {
-    console.log("\n=== TRAJETS DISPONIBLES ===");
+    console.log("=== TRAJETS DISPONIBLES ===");
     for (let i = 0; i < trips.length; i++) {
         const t = trips[i];
-        console.log("#" + t.id + " " + t.departure + " → " + t.destination);
+         console.log("-_-_-_-_-_-_-_-_-_-_-_-_");
+        console.log( t.id + " " + t.departure + " → " + t.destination);
         console.log("  Départ : " + t.departureTime);
         console.log("  Arrivée : " + t.arrivalTime);
         console.log("  Prix : " + t.price + " DH");
-        console.log("  Places disponibles : " + t.availableSeats + "\n");
+        console.log("  Places disponibles : " + t.availableSeats );
+      
     }
 }
+// function afficherTrajets() {
+//     console.log("                       === TRAJETS DISPONIBLES ===");
+//     console.table(trips, ['id', 'departure', 'destination', 'departureTime', 'arrivalTime', 'price', 'availableSeats']);
+// }
 
 // --- Option 2 : Acheter un ticket ---
 function acheterTicket() {
-    console.log("\n=== ACHETER UN TICKET ===");
+    console.log("=== ACHETER UN TICKET ===");
     
     const passengerName = prompt("Nom du passager : ");
     if (!passengerName || passengerName.trim() === "") {
@@ -275,12 +284,12 @@ function acheterTicket() {
     tickets.push(ticket);
     trip.availableSeats--;
 
-    console.log("\nTicket acheté avec succès.");
-    console.log(`Ticket #${ticket.id}`);
-    console.log(`Passager : ${ticket.passengerName}`);
-    console.log(`Trajet : ${trip.departure} → ${trip.destination}`);
-    console.log(`Place : ${ticket.seatNumber}`);
-    console.log(`Prix : ${ticket.price} DH`);
+    console.log("Ticket acheté avec succès.");
+    console.log("Ticket #" + ticket.id);
+    console.log("Passager : " + ticket.passengerName);
+    console.log("Trajet : " + trip.departure + " → " + trip.destination);
+    console.log("Place : " + ticket.seatNumber);
+    console.log("Prix : " + ticket.price + " DH");
 }
 
 // --- Option 3 : Afficher les tickets ---
@@ -290,22 +299,22 @@ function afficherTickets() {
         return;
     }
 
-    console.log("\n=== TICKETS ===\n");
+    console.log("=== TICKETS ===");
     for (let i = 0; i < tickets.length; i++) {
         const ticket = tickets[i];
         const trip = trips.find(t => t.id === ticket.tripId);
 
-        console.log(`Ticket #${ticket.id}`);
-        console.log(`Passager : ${ticket.passengerName}`);
-        console.log(`Trajet : ${trip.departure} → ${trip.destination}`);
-        console.log(`Place : ${ticket.seatNumber}`);
-        console.log(`Prix : ${ticket.price} DH\n`);
+        console.log("Ticket #" + ticket.id);
+        console.log("Passager : " + ticket.passengerName);
+        console.log("Trajet : " + trip.departure + " → " + trip.destination);
+        console.log("Place : " + ticket.seatNumber);
+        console.log("Prix : " + ticket.price + " DH");
     }
 }
 
 // --- Option 4 : Annuler un ticket ---
 function annulerTicket() {
-    console.log("\n=== ANNULER UN TICKET ===");
+    console.log("=== ANNULER UN TICKET ===");
     
     const ticketIdInput = prompt("Identifiant du ticket : ");
     const ticketId = parseInt(ticketIdInput);
@@ -331,12 +340,12 @@ function annulerTicket() {
 
     tickets.splice(index, 1);
 
-    console.log("\nTicket annulé avec succès.");
+    console.log("Ticket annulé avec succès.");
 }
 
 // --- Option 5 : Rechercher un ticket ---
 function rechercherTicket() {
-    console.log("\n=== RECHERCHER UN TICKET ===");
+    console.log("=== RECHERCHER UN TICKET ===");
     
     const name = prompt("Nom du passager : ");
 
@@ -354,22 +363,22 @@ function rechercherTicket() {
         return;
     }
 
-    console.log(`\n${resultats.length} ticket(s) trouvé(s) :\n`);
+    console.log(resultats.length + " ticket(s) trouvé(s) :");
     for (let i = 0; i < resultats.length; i++) {
         const ticket = resultats[i];
         const trip = trips.find(t => t.id === ticket.tripId);
 
-        console.log(`Ticket #${ticket.id}`);
-        console.log(`Passager : ${ticket.passengerName}`);
-        console.log(`Trajet : ${trip.departure} → ${trip.destination}`);
-        console.log(`Place : ${ticket.seatNumber}`);
-        console.log(`Prix : ${ticket.price} DH\n`);
+        console.log("Ticket #" + ticket.id);
+        console.log("Passager : " + ticket.passengerName);
+        console.log("Trajet : " + trip.departure + " → " + trip.destination);
+        console.log("Place : " + ticket.seatNumber);
+        console.log("Prix : " + ticket.price + " DH");
     }
 }
 
 // --- Option 6 : Filtrer les trajets ---
 function filtrerTrajets() {
-    console.log("\n=== FILTRER LES TRAJETS ===");
+    console.log("=== FILTRER LES TRAJETS ===");
     
     const ville = prompt("Ville de départ : ");
 
@@ -387,22 +396,22 @@ function filtrerTrajets() {
         return;
     }
 
-    console.log("\nRésultat :\n");
+    console.log("Résultat :");
     for (let i = 0; i < resultats.length; i++) {
         const t = resultats[i];
-        console.log(`${t.departure} → ${t.destination} : ${t.price} DH`);
+        console.log(t.departure + " → " + t.destination + " : " + t.price + " DH");
     }
 }
 
 // --- Option 7 : Trier les trajets ---
 function trierTrajets() {
-    console.log("\n=== TRAJETS TRIÉS PAR PRIX CROISSANT ===\n");
+    console.log("=== TRAJETS TRIÉS PAR PRIX CROISSANT ===");
     
     const tries = [...trips].sort((a, b) => a.price - b.price);
 
     for (let i = 0; i < tries.length; i++) {
         const t = tries[i];
-        console.log(`${t.departure} → ${t.destination} : ${t.price} DH`);
+        cconsole.log(t.departure + " → " + t.destination + " : " + t.price + " DH");
     }
 }
 
@@ -437,10 +446,11 @@ while (running) {
         trierTrajets(); 
     }
     else if (choix === "0") {
-        console.log("\nAu revoir ! Bon voyage ! 🚂\n");
+        console.log("Au revoir");
         running = false; 
     } 
     else {
-        console.log("\nChoix invalide. Veuillez réessayer.");
+        console.log("Choix invalide. Veuillez réessayer.");
     }
 }
+
